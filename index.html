@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="cn">
+<head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content="Pelican" />
+        <title>dongdong</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">dongdong</a></h1>
+                <nav><ul>
+                    <li><a href="/category/tools.html">tools</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/idea-vim-pei-zhi.html">idea vim 配置</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2023-08-14T20:50:00+08:00">
+                Published: Mon 14 August 2023
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/junteng.html">junteng</a>
+        </address>
+<p>In <a href="/category/tools.html">tools</a>.</p>
+<p>tags: <a href="/tag/idea.html">idea</a> <a href="/tag/vim.html">vim</a> </p>
+</footer><!-- /.post-info --><p>idea的vim配置文件是.ideavimrc，和vim的.vimrc大同小异
+大致可以分成下面几个部分</p>
+<h3>set</h3>
+<p>这个和vim的配置文件一样:</p>
+<div class="highlight"><pre><span></span><code><span class="k">set</span> <span class="k">nu</span>
+<span class="k">set</span> <span class="nb">tabstop</span>
+<span class="k">set</span> <span class="nb">expandtab</span>
+<span class="k">set</span> <span class="nb">smartcase</span>
+<span class="k">set</span> <span class="nb">ignorecase</span>
+<span class="k">set</span> <span class="nb">incsearch</span>
+<span class="k">set</span> <span class="nb">hlsearch</span>
+但是有几个是idea特有的:
+<span class="k">set</span> <span class="nb">clipboard</span><span class="p">=</span>ideaput
+<span class="k">set</span> ideamarks
+<span class="k">set</span> ideajoin
+</code></pre></div>
+
+<h3>启用插件</h3>
+<p>这个需要在idea的plugins里面安装，一般搜索vim就可以了</p>
+<div class="highlight"><pre><span></span><code><span class="k">set</span> NERDTree 
+<span class="k">set</span> surround
+<span class="k">set</span> easymotion
+<span class="k">set</span> highlightedyank
+<span class="k">set</span> sneak
+<span class="k">set</span> which<span class="p">-</span><span class="nb">key</span> <span class="c">&quot;自动切换输入法，windows需要安装英语</span>
+</code></pre></div>
+
+<h3>键位映射</h3>
+<div class="highlight"><pre><span></span><code>map只能配合<span class="p">&lt;</span>action<span class="p">&gt;</span>使用，括号里面是idea的各种命令，可以使用:actionlist <span class="s2">&quot;你搜索的命令&quot;</span>查找<span class="p">,</span>也可以打开ideavim的action track，来查找idea到功能
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">i</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoImplementation<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">b</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoDeclaration<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">q</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>CloseContent<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">w</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>SaveAll<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">c</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoClass<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">f</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoFile<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">a</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoAction<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span>s <span class="p">&lt;</span>action<span class="p">&gt;(</span>GotoSymbol<span class="p">)</span>
+map <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">h</span> <span class="p">&lt;</span>action<span class="p">&gt;(</span>TypeHierarchy<span class="p">)</span>
+
+nmap<span class="p">,</span><span class="nb">nnoremap</span><span class="p">,</span>imap<span class="p">,</span>inoremap等，可以映射到:命令<span class="p">&lt;</span>CR<span class="p">&gt;</span>来使用
+nmap gh :action ShowErrorDescription<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+nmap gq :action ReformatCode<span class="p">&lt;</span>CR<span class="p">&gt;</span>
+nmap gQ :action ShowReformatFileDialog<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+nmap <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">p</span> :action ParameterInfo<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+
+<span class="nb">noremap</span> H ^
+<span class="nb">noremap</span> L $
+<span class="nb">nnoremap</span> Y <span class="k">y</span>$
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">n</span> :NERDTreeFocus<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">t</span> :NERDTree<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+<span class="nb">nnoremap</span> <span class="p">&lt;</span>leader<span class="p">&gt;</span><span class="k">r</span> :RenameElement<span class="p">&lt;</span><span class="k">cr</span><span class="p">&gt;</span>
+</code></pre></div>
+
+<h3>处理idea和vim到冲突</h3>
+<div class="highlight"><pre><span></span><code>v代表可视模式，i代表插入模式，n代表normal模式，a代表所有模式
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">c</span><span class="p">&gt;</span> <span class="k">v</span>:ide
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">v</span><span class="p">&gt;</span> <span class="k">i</span>:ide
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">x</span><span class="p">&gt;</span> <span class="k">v</span>:ide
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">j</span><span class="p">&gt;</span> <span class="k">i</span>:ide
+<span class="c">&quot;sethandler &lt;c-p&gt; i:ide</span>
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">e</span><span class="p">&gt;</span> <span class="k">n</span>:ide
+sethandler <span class="p">&lt;</span><span class="k">c</span><span class="p">-</span><span class="k">a</span><span class="p">&gt;</span> <span class="k">n</span>:ide
+</code></pre></div>                </article>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://getpelican.com/">Pelican</a></li>
+                            <li><a href="https://www.python.org/">Python.org</a></li>
+                            <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a href="https://www.python.org/">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
